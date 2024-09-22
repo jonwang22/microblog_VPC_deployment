@@ -1,6 +1,6 @@
 #!/bin/bash
 
-appilication_server_IP="$APPLICATION_SERVER_IP" # <----$APPLICATION_SERVER_IP is set within .bashrc on the webserver as an environment variable
+application_server_IP="$APPLICATION_SERVER_IP" # <----$APPLICATION_SERVER_IP is set within .bashrc on the webserver as an environment variable
 download_path="/home/ubuntu/start_app.sh"
 login_name="ubuntu"
 ssh_key="/home/ubuntu/.ssh/AppWL4.pem"
