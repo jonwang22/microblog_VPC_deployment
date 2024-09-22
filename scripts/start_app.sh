@@ -48,4 +48,6 @@ flask translate compile
 flask db upgrade
 
 echo "Starting application..."
-gunicorn -b :5000 -w 4 microblog:app # --daemon
+gunicorn -b :5000 -w 4 microblog:app
+
+echo "Application launched. Please go to {$(curl ifconfig.me)}"
