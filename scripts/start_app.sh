@@ -50,4 +50,4 @@ flask db upgrade
 echo "Starting application..."
 gunicorn -b :5000 -w 4 microblog:app --daemon
 
-echo "Application launched. Please go to $(curl --silent -o /dev/null ifconfig.me) to access the application."
+echo "Application launched. You can now access the application from the web browser."
