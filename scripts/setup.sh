@@ -12,19 +12,19 @@ start_script="source $file_path"
 
 # Trying to reduce output with this
 ssh -i "$ssh_key" "$login_name@$application_server_IP" << EOF 2>/dev/null
+if  pgrep -f gunicorn > /dev/null; then
+                echo "Gunicorn is running, cleaning environment."
+                pkill gunicorn
+        else
+                echo "Gunicorn is currently not running. Environment is ready."
+        fi
+
 if [[ -d "$repo_path" ]] && [[ -f "$file_path" ]]; then
 	echo "Repository and File already exist."
 	echo "Deleting existing local repo and file."
 	rm -rf "$repo_path"
 	rm "$file_path"
-	if  pgrep -f gunicorn > /dev/null; then
-		echo "Gunicorn is running, cleaning environment."
-		pkill gunicorn
-		curl -L -o "$file_path" "$script_url" 2>/dev/null && chmod 755 "$file_path" && "$start_script"
-	else
-		echo "Gunicorn is currently not running. Environment is ready."
-		curl -L -o "$file_path $script_url" 2>/dev/null && chmod 755 "$file_path" && "$start_script"
-	fi
+	curl -L -o "$file_path" "$script_url" 2>/dev/null && chmod 755 "$file_path" && "$start_script"
 else
 	curl -L -o "$file_path" "$script_url" 2>/dev/null && chmod 755 "$file_path" && "$start_script"
 fi
