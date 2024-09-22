@@ -18,7 +18,7 @@ sudo apt update -y
 echo "Installing font configs, java runtime env, and tools managing software sources..."
 sudo apt install -y fontconfig openjdk-17-jre software-properties-common
 echo "Installing Deadsnakes PPA Repo for Python..."
-sudo add-apt-repository ppa:deadsnakes/ppa
+sudo add-apt-repository -y ppa:deadsnakes/ppa
 echo "Install Python resources..."
 sudo apt install -y python3.9
 sudo apt install -y python3.9-venv
