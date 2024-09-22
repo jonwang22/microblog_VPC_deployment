@@ -21,13 +21,20 @@ echo "Installing Deadsnakes PPA Repo for Python..."
 sudo add-apt-repository ppa:deadsnakes/ppa
 echo "Install Python resources..."
 sudo apt install -y python3.9
+sudo apt install -y python3.9-venv
 sudo apt install -y python3-pip
 
-echo "Updating pip..."
-pip install --upgrade pip
-
+# Build application
 echo "Navigating to source code..."
 cd $HOME/microblog_VPC_deployment
+
+echo "Creating Python Virtual Environment..."
+python3.9 -m venv venv
+source venv/bin/activate
+
+echo "Upgrading PIP..."
+pip install --upgrade pip
+
 
 echo "Installing all necessary application dependencies..."
 pip install -r requirements.txt
