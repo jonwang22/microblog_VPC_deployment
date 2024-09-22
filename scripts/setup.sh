@@ -17,7 +17,14 @@ if [[ -d "$repo_path" ]] && [[ -f "$file_path" ]]; then
 	echo "Deleting existing local repo and file."
 	rm -rf $repo_path
 	rm $file_path
-	curl -L -o $file_path $script_url 2>/dev/null && chmod 755 $file_path && $start_script
+	if [[ pgrep -f gunicorn > /dev/null ]]; then
+		echo "Gunicorn is running, cleaning environment."
+		pkill gunicorn
+		curl -L -o $file_path $script_url 2>/dev/null && chmod 755 $file_path && $start_script
+	else
+		echo "Gunicorn is currently not running. Environment is ready."
+		curl -L -o $file_path $script_url 2>/dev/null && chmod 755 $file_path && $start_script
+	fi
 else
 	curl -L -o $file_path $script_url 2>/dev/null && chmod 755 $file_path && $start_script
 fi
