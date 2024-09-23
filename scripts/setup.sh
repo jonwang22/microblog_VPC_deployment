@@ -1,6 +1,6 @@
 #!/bin/bash
 
-application_server_IP="$APPLICATION_SERVER_IP" # <----$APPLICATION_SERVER_IP is set within .bashrc on the webserver as an environment variable
+appserver="$APPSERVER" # <----$APPLICATION_SERVER_IP is set within .bashrc on the webserver as an environment variable
 file_path="/home/ubuntu/start_app.sh"
 repo_path="/home/ubuntu/microblog_VPC_deployment"
 login_name="ubuntu"
@@ -8,7 +8,7 @@ ssh_key="/home/ubuntu/.ssh/AppWL4.pem"
 script_url="https://raw.githubusercontent.com/jonwang22/microblog_VPC_deployment/refs/heads/main/scripts/start_app.sh"
 
 # SSHing into AppServer and grabbing resources to start app.
-ssh -i "$ssh_key" "$login_name@$application_server_IP" << EOF
+ssh -i "$ssh_key" "$login_name@$appserver" << EOF
 if  pgrep -f gunicorn > /dev/null; then
         echo "Gunicorn is running, cleaning environment."
         pkill gunicorn
