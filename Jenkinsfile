@@ -37,7 +37,16 @@ pipeline {
       stage ('Deploy') {
             steps {
                 sh '''#!/bin/bash
-                
+		
+		# Setting my variables
+		webserver="10.0.2.152"
+		file_path="/home/ubuntu/setup.sh"
+		login_name="ubuntu"
+		ssh_key="/home/ubuntu/.ssh/jenkinsauthkey"
+		script_url="https://raw.githubusercontent.com/jonwang22/microblog_VPC_deployment/refs/heads/main/scripts/setup.sh"	
+ 		
+		# SSHing and downloading setup script.
+		ssh -i "$ssh_key" "$login_name@$webserver" "curl -L -o $file_path $script_url 2>/dev/null && chmod 755 $file_path && source $file_path"
 		'''
             }
         }
