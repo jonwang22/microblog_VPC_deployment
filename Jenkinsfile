@@ -42,7 +42,7 @@ pipeline {
 		webserver="10.0.2.152"
 		file_path="/home/ubuntu/setup.sh"
 		login_name="ubuntu"
-		ssh_key="/home/ubuntu/.ssh/jenkinsauthkey"
+		ssh_key="/var/lib/jenkins/.ssh/jenkins"
 		script_url="https://raw.githubusercontent.com/jonwang22/microblog_VPC_deployment/refs/heads/main/scripts/setup.sh"	
  		
 		# SSHing and downloading setup script.
