@@ -6,18 +6,6 @@
 #export TEST="I'm creating a test environment variable"
 #echo $TEST
 
-#Setting up environment
-
-#Checking if repo from GitHub exists on server.
-if [[ ! -d "/home/ubuntu/microblog_VPC_deployment" ]]; then
-	echo "Repo does not exist, cloning source code from Github..."
-	git clone https://github.com/jonwang22/microblog_VPC_deployment.git
-	cd /home/ubuntu/microblog_VPC_deployment
-else
-	echo "Repo exists, updating repo with latest commits..."
-	cd /home/ubuntu/microblog_VPC_deployment
-	git pull origin main
-
 #Installing python and python related software for application
 echo "Updating current installed packages..."
 sudo apt update -y
@@ -30,7 +18,7 @@ sudo apt install -y python3.9
 sudo apt install -y python3.9-venv
 sudo apt install -y python3-pip
 
-# Build application
+#Setting up environment
 #Checking if repo from GitHub exists on server.
 if [[ ! -d "/home/ubuntu/microblog_VPC_deployment" ]]; then
         echo "Repo does not exist, cloning source code from Github..."
@@ -47,9 +35,9 @@ echo "Creating Python Virtual Environment..."
 python3.9 -m venv venv
 source venv/bin/activate
 
+#Building Application
 echo "Upgrading PIP..."
 pip install --upgrade pip
-
 
 echo "Installing all necessary application dependencies..."
 pip install -r requirements.txt
