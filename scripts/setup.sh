@@ -1,6 +1,6 @@
 #!/bin/bash
 
-appserver="$APPSERVER" # <----$APPLICATION_SERVER_IP is set within .bashrc on the webserver as an environment variable
+appserver="$1" # <----$APPLICATION_SERVER_IP is set as argument in Jenkinsfile
 file_path="/home/ubuntu/start_app.sh"
 repo_path="/home/ubuntu/microblog_VPC_deployment"
 login_name="ubuntu"
@@ -13,24 +13,11 @@ if  pgrep -f gunicorn > /dev/null; then
         echo "Gunicorn is running, cleaning environment."
         pkill gunicorn
 	echo "Gunicorn process killed."
+	echo "Downloading setup script and executing script..."
+	curl -L -o $file_path $script_url 2>/dev/null
 else
         echo "Gunicorn is currently not running. Environment is ready."
-fi
-
-if [[ -d "$repo_path" ]] && [[ -f "$file_path" ]]; then
-	echo "Repository and File already exist."
-	echo "Deleting existing local repo and file."
-	rm -rf $repo_path
-	rm $file_path
+	echo "Downloading setup script and executing script..."
 	curl -L -o $file_path $script_url 2>/dev/null
-	chmod 755 $file_path
-	echo "Downloaded script and set permissions."
-	source $file_path
-else
-	echo "Downloading and starting the script."
-	curl -L -o $file_path $script_url 2>/dev/null
-	chmod 755 $file_path
-	echo "Downloaded script and set permissions."
-	source $file_path
 fi
 EOF

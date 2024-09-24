@@ -8,9 +8,15 @@
 
 #Setting up environment
 
-#Cloning repo from GitHub
-echo "Cloning Source Code from GitHub..."
-git clone https://github.com/jonwang22/microblog_VPC_deployment.git
+#Checking if repo from GitHub exists on server.
+if [[ ! -d "/home/ubuntu/microblog_VPC_deployment" ]]; then
+	echo "Repo does not exist, cloning source code from Github..."
+	git clone https://github.com/jonwang22/microblog_VPC_deployment.git
+	cd /home/ubuntu/microblog_VPC_deployment
+else
+	echo "Repo exists, updating repo with latest commits..."
+	cd /home/ubuntu/microblog_VPC_deployment
+	git pull origin main
 
 #Installing python and python related software for application
 echo "Updating current installed packages..."
@@ -25,8 +31,17 @@ sudo apt install -y python3.9-venv
 sudo apt install -y python3-pip
 
 # Build application
-echo "Navigating to source code..."
-cd $HOME/microblog_VPC_deployment
+#Checking if repo from GitHub exists on server.
+if [[ ! -d "/home/ubuntu/microblog_VPC_deployment" ]]; then
+        echo "Repo does not exist, cloning source code from Github..."
+        git clone https://github.com/jonwang22/microblog_VPC_deployment.git
+	echo "Cloned repo, navigating to repo..."
+        cd /home/ubuntu/microblog_VPC_deployment
+else
+        echo "Repo exists, navigating to repo and updating with latest commits..."
+        cd /home/ubuntu/microblog_VPC_deployment
+        git pull origin main
+fi
 
 echo "Creating Python Virtual Environment..."
 python3.9 -m venv venv

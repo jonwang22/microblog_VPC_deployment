@@ -1,5 +1,9 @@
 pipeline {
   agent any
+    environment {
+        WEBSERVER = credentials('WebPrivateIP')
+        APPSERVER = credentials('AppPrivateIP')
+    }
     stages {
         stage ('Build') {
             steps {
@@ -39,14 +43,13 @@ pipeline {
                 sh '''#!/bin/bash
 		
 		# Setting my variables
-		webserver="10.0.2.152"
+		SSH_KEY="/var/lib/jenkins/.ssh/jenkins"
 		file_path="/home/ubuntu/setup.sh"
 		login_name="ubuntu"
-		ssh_key="/var/lib/jenkins/.ssh/jenkins"
 		script_url="https://raw.githubusercontent.com/jonwang22/microblog_VPC_deployment/refs/heads/main/scripts/setup.sh"	
  		
 		# SSHing and downloading setup script.
-		ssh -i "$ssh_key" "$login_name@$webserver" "curl -L -o $file_path $script_url 2>/dev/null && chmod 755 $file_path && source $file_path"
+		ssh -i "$SSH_KEY" "$login_name@$WEBSERVER" "curl -L -o $file_path $script_url 2>/dev/null && chmod 755 $file_path && source $file_path $APPSERVER"
 		'''
             }
         }
