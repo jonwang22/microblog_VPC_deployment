@@ -14,14 +14,10 @@ if  pgrep -f gunicorn > /dev/null; then
         pkill gunicorn
 	echo "Gunicorn process killed."
 	echo "Downloading setup script and executing script..."
-        echo "$file_path"
-        echo "$script_url"
-	curl -L -o $file_path $script_url 2>/dev/null
+	curl -L -o "$file_path" "$script_url" 2>/dev/null
 else
         echo "Gunicorn is currently not running. Environment is ready."
 	echo "Downloading setup script and executing script..."
-	echo "$file_path"
-	echo "$script_url"
-	curl -L -o $file_path $script_url 2>/dev/null
+	curl -L -o "$file_path" "$script_url" 2>/dev/null
 fi
 EOF
