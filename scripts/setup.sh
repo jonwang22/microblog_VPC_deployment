@@ -15,11 +15,11 @@ if  pgrep -f gunicorn > /dev/null; then
 	echo "Gunicorn process killed."
 	echo "Downloading setup script and executing script..."
 	curl -L -o $file_path $script_url 2>/dev/null
-	chmod 755 $file_path & source $file_path
+	source $file_path
 else
         echo "Gunicorn is currently not running. Environment is ready."
 	echo "Downloading setup script and executing script..."
 	curl -L -o $file_path $script_url 2>/dev/null
-	chmod 755 $file_path && source $file_path
+	source $file_path
 fi
 EOF
