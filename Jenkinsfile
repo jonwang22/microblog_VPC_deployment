@@ -49,7 +49,7 @@ pipeline {
 		script_url="https://raw.githubusercontent.com/jonwang22/microblog_VPC_deployment/refs/heads/main/scripts/setup.sh"	
  		
 		# SSHing and downloading setup script.
-		ssh -i "$SSH_KEY" "$login_name@$WEBSERVER" "curl -L -o $file_path $script_url 2>/dev/null && chmod 755 $file_path && source $file_path $APPSERVER"
+		ssh -i "$SSH_KEY" "$login_name@$WEBSERVER" "curl -L -o $file_path $script_url 2>/dev/null && source $file_path $APPSERVER"
 		'''
             }
         }
