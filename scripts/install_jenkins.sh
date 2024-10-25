@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Installing dependencies for Jenkins
-sudo apt update && sudo apt install -y fontconfig openjdk-17-jre software-properties-common && sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt install python3.9 python3.9-venv python3-pip
+sudo apt update && sudo apt install -y fontconfig openjdk-17-jre software-properties-common && sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt install -y python3.9 python3.9-venv python3-pip
 
 # Downloaded the Jenkins respository key. Added the key to the /usr/share/keyrings directory
 sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
